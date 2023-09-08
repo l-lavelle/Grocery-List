@@ -1,17 +1,24 @@
-require('dotenv').config();
-const express = require('express');
-const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const sequelize = require('./config/connection');
-const routes = require('./controllers');
-const exphbs = require('express-handlebars');
+require("dotenv").config();
+const path = require("path");
+const express = require("express");
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const sequelize = require("./config/connection");
+const routes = require("./controllers");
+const exphbs = require("express-handlebars");
+const hbs = exphbs.create();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
-  secret: 'Super secret secret',
-  cookie: {},
+  secret: process.env.SESSION_SECRET,
+  cookie: {
+    maxAge: 60 * 60 * 1000,
+    httpOnly: true,
+    secure: false,
+    sameSite: "strict",
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -19,16 +26,18 @@ const sess = {
   }),
 };
 
-app.use(session(sess));
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(routes);
+// app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+sequelize.sync().then(() => {
+  app.listen(PORT, () =>
+    console.log("Server listening on: http://localhost:" + PORT)
+  );
 });

@@ -2,7 +2,15 @@ const router = require("express").Router();
 // will need path for user model
 const { User, List, Product, ListProduct } = require("../models");
 
-// Create route to render view of signup page
+// Render Sign up page
+router.get("/signup", async (req, res) => {
+  try {
+    res.render("signup");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // Create new user
 // make sure variables correspond with user model once created
@@ -25,8 +33,15 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// create view to render login page
-
+// Render login page
+router.get("/", async (req, res) => {
+  try {
+    res.render("login");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 // Login
 // check with model for variables
 router.post("/login", async (req, res) => {

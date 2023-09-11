@@ -19,8 +19,8 @@ const sess = {
     secure: false,
     sameSite: "strict",
   },
-  resave: false,
-  saveUninitialized: true,
+  resave: process.env.SESSION_RESAVE === 'true',
+  saveUninitialized: process.env.SESSION_SAVE_UNINITIALIZED === 'true',
   store: new SequelizeStore({
     db: sequelize,
   }),

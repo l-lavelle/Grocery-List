@@ -1,0 +1,30 @@
+[
+    {
+        "name": "monday",
+        "user_id": 1
+    },
+    {
+        "name": "tues",
+        "user_id": 2
+    },
+    {
+        "name": "wed",
+        "user_id": 3
+    },
+    {
+        "name":"thrus",
+        "user_id":1
+    },
+    {
+        "name":"fri",
+        "user_id":2
+    },
+    {
+        "name":"sat",
+        "user_id":3
+    },
+    {
+        "name":"sun",
+        "user_id":1
+    }
+]

@@ -26,4 +26,18 @@ router.post("/:user_id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const listData = await List.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json(listData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

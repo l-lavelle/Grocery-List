@@ -1,8 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <div class="mb-3">
+      <div class="mb-3 d-flex">
         <input type="text" class="form-control" id="search-bar" placeholder="Search...">
+        <button type="button" class="btn btn-primary ml-2" id="search-button">Search</button>
       </div>
 
       <div id="api-response-cards" class="card-columns">
@@ -29,14 +30,15 @@
   </div>
 </div>
 
-<script src="../public/js/api.js"></script>
+<script src="../js/api.js"></script>
 <script>
-  document.getElementById('search-bar').addEventListener('input', function() {
-    const query = this.value;
+  document.getElementById('search-button').addEventListener('click', function() {
+    const query = document.getElementById('search-bar').value;
     if (query.length > 2) { 
       searchItems(query);
     }
   });
+
 
   function decreaseQuantity(itemId) {
     // Function to decrease quantity

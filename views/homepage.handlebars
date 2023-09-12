@@ -29,9 +29,13 @@
   </div>
 </div>
 
+<script src="../public/js/api.js"></script>
 <script>
   document.getElementById('search-bar').addEventListener('input', function() {
-    // API search logic
+    const query = this.value;
+    if (query.length > 2) { 
+      searchItems(query);
+    }
   });
 
   function decreaseQuantity(itemId) {

@@ -154,6 +154,7 @@ router.post("/addItem", async (req, res) => {
   try {
     const dbUserData = await Product.create({
       name: req.body.product_name,
+      foodId: req.body.foodId,
     });
     res.status(200).json(dbUserData);
   } catch (err) {

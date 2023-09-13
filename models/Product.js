@@ -16,6 +16,10 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    foodId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize,

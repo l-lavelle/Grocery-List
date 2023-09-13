@@ -1,10 +1,11 @@
 const submitBtn = document.getElementById("signup-form");
+const signupform = document.getElementById("signup-form");
 let div = document.createElement("div");
 div.className = "mb-3";
 let errorMessage = document.createElement("p");
 errorMessage.className = "error-signup";
 div.append(errorMessage);
-document.body.appendChild(div);
+signupform.appendChild(div);
 
 submitBtn.addEventListener("submit", async function (event) {
   event.preventDefault();
@@ -26,6 +27,12 @@ submitBtn.addEventListener("submit", async function (event) {
       const data = await response.json();
       if (response.ok) {
         document.location.replace("/");
+      } else if (data.name === "SequelizeUniqueConstraintError") {
+        errorMessage.textContent = "Username already exists";
+        errorMessage.style.color = "red";
+      } else {
+        errorMessage.textContent = "Failed to sign up";
+        errorMessage.style.color = "red";
       }
     }
   } else {

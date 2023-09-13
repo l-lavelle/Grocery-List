@@ -39,6 +39,14 @@
     }
   });
 
+  document.getElementById('search-bar').addEventListener('keyup', function(event) {
+    if (event.keyCode === 13) { 
+      const query = event.target.value;
+      if (query.length > 2) { 
+        searchItems(query);
+      }
+    }
+  });
 
   function decreaseQuantity(itemId) {
     // Function to decrease quantity

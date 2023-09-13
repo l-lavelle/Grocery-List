@@ -44,7 +44,7 @@ app.post('/api/search', async (req, res) => {
   const limit = 6;
 
   try {
-    const response = await fetch(`${process.env.API_URL}?q=${query}&limit=${limit}&app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`);
+    const response = await fetch(`${process.env.API_URL}?app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}&ingr=${query}&category=generic-foods`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

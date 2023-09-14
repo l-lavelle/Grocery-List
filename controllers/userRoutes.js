@@ -156,7 +156,8 @@ router.get("/list/:list_id", async (req, res) => {
 router.post("/addItem", async (req, res) => {
   try {
     const dbUserData = await Product.create({
-      name: req.body.product_name,
+      name: req.body.name,
+      food_id: req.body.food_id,
     });
     res.status(200).json(dbUserData);
   } catch (err) {

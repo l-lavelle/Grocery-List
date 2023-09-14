@@ -1,13 +1,15 @@
 <div class="container">
   <div class="row">
     <!-- Sidebar for displaying created lists -->
-    <div class="col-md-3">
+    <div class="col-md-3 justify-content-center mt-5 border-end">
       <div class="list-group">
         {{#each lists}}
-          <a href="#" class="list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
-            {{this.name}}
-          </a>
-          <button class="btn btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">Delete</button>
+          <div class="d-flex justify-content-center w-100 p-3">
+            <a href="#" class="col-md-9 list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
+              {{this.name}}
+            </a>
+            <button class="col-md-2 btn btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">Delete</button>
+          </div>
         {{/each}}
       </div>
     </div>

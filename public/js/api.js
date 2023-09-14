@@ -58,7 +58,7 @@ function displaySearchResults(data) {
     const addButton = document.createElement("button");
     addButton.className = "btn btn-primary";
     addButton.textContent = "Add to List";
-    addButton.addEventListener("click", () => {
+    addButton.addEventListener("click", (event) => {
       addToItemList(food.foodId, food.label);
     });
 

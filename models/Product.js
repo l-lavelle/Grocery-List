@@ -16,7 +16,7 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    foodId: {
+    food_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },

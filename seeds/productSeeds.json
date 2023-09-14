@@ -1,23 +1,30 @@
 [
     {
-        "name": "apple"
+        "name": "apple",
+        "food_id": "food_a1gb9ubb72c7snbuxr3weagwv0dd"
     },
     {
-        "name": "orange"
+        "name": "orange",
+        "food_id": "food_b0bnl8oayiqhs2at63ifxbm6i3o3"
     },
     {
-        "name": "lemon"
+        "name": "lemon",
+        "food_id": "food_a6uzc62astrxcgbtzyq59b6fncrr"
     },
     {
-        "name": "pinapple"
+        "name": "pineapple",
+        "food_id": "food_b5maw38amr54vpat8d5vhbgmqfxn"
     },
     {
-        "name": "crandberry"
+        "name": "cranberry",
+        "food_id": "food_at0yaana2e4sguapnr728bkczyk9"
     },
     {
-        "name": "watermelon"
+        "name": "watermelon",
+        "food_id": "food_aom4czfarp4wsxaeshkohaig1ou5"
     },
     {
-        "name": "cookie"
+        "name": "cookie",
+        "food_id": "food_b8hkw37asceztnbj3sfiuajjet67"
     }
 ]

@@ -1,13 +1,22 @@
 const router = require("express").Router();
-// will need path for user model
 const { User, List, Product, ListProduct } = require("../models");
-
+const withAuth = require("../utils/auth");
 // Render homepage page
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
-    res.render("homepage");
+    const listData = await List.findAll({
+      include: [{ model: User }],
+      where: {
+        user_id: req.session.userId,
+      },
+    });
+    const lists = listData.map((posts) => posts.get({ plain: true }));
+    res.render("homepage", {
+      lists,
+      loggedIn: Boolean(req?.session?.loggedIn),
+      userId: req?.session?.userId,
+    });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -59,7 +68,7 @@ router.post("/login", async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: {
-        username: req.body.username,
+        username: req.body.email,
       },
     });
     if (!dbUserData) {
@@ -87,6 +96,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// get logout page
+router.get("/logout", async (req, res) => {
+  try {
+    res.render("logout");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // Logout
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
@@ -95,6 +114,18 @@ router.post("/logout", (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+// Render Create New List Page
+router.get("/createlist/:user_id", async (req, res) => {
+  try {
+    res.render("createlist", {
+      loggedIn: Boolean(req?.session?.loggedIn),
+      userId: req?.session?.userId,
+    });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
@@ -153,7 +184,8 @@ router.get("/list/:list_id", async (req, res) => {
 router.post("/addItem", async (req, res) => {
   try {
     const dbUserData = await Product.create({
-      name: req.body.product_name,
+      name: req.body.name,
+      food_id: req.body.food_id,
     });
     res.status(200).json(dbUserData);
   } catch (err) {

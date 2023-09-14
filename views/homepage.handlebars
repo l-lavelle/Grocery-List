@@ -11,6 +11,9 @@
       </div>
     </div>
 
+{{#if loggedIn}}
+{{userId}}
+
     <div class="col-md-4">
       <h3>{{listName}}</h3>
       <ul class="list-group">
@@ -27,6 +30,7 @@
         {{/each}}
       </ul>
     </div>
+{{/if}}
   </div>
 </div>
 
@@ -39,6 +43,14 @@
     }
   });
 
+  document.getElementById('search-bar').addEventListener('keyup', function(event) {
+    if (event.keyCode === 13) { 
+      const query = event.target.value;
+      if (query.length > 2) { 
+        searchItems(query);
+      }
+    }
+  });
 
   function decreaseQuantity(itemId) {
     // Function to decrease quantity
@@ -51,4 +63,6 @@
   function removeItem(itemId) {
     // Function to remove item
   }
+
+
 </script>

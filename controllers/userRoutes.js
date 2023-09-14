@@ -89,6 +89,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// get logout page
+router.get("/logout", async (req, res) => {
+  try {
+    res.render("logout");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // Logout
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {

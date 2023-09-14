@@ -2,9 +2,8 @@ const router = require("express").Router();
 // will need path for list model
 const { User, List, Product, ListProduct } = require("../../models");
 
-const withAuth = require("../../utils/auth");
-
-router.get("/:user_id", withAuth, async (req, res) => {
+// get all user lists
+router.get("/:user_id", async (req, res) => {
   try {
     const listData = await List.findAll({
       include: [{ model: User }],

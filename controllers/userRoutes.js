@@ -1,5 +1,4 @@
 const router = require("express").Router();
-// will need path for user model
 const { User, List, Product, ListProduct } = require("../models");
 
 // Render homepage page
@@ -98,6 +97,18 @@ router.post("/logout", (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+// Render Create New List Page
+router.get("/createlist/:user_id", async (req, res) => {
+  try {
+    res.render("createlist", {
+      loggedIn: Boolean(req?.session?.loggedIn),
+      userId: req?.session?.userId,
+    });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

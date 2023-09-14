@@ -12,9 +12,18 @@
     </div>
 
 {{#if loggedIn}}
-{{userId}}
+<div class="col-md-4">
+<div class="input-group">
+  <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+    <option selected>Choose...</option>
+    {{#each lists as |list|}}
+    <option value="{{id}}">{{name}}</option>
+    {{/each}}
+  </select>
+  <button class="btn btn-outline-secondary" type="button">Button</button>
+</div>
 
-    <div class="col-md-4">
+    {{!-- <div class="col-md-4">
       <h3>{{listName}}</h3>
       <ul class="list-group">
         {{#each items}}
@@ -29,7 +38,7 @@
         </li>
         {{/each}}
       </ul>
-    </div>
+    </div> --}}
 {{/if}}
   </div>
 </div>

@@ -1,15 +1,22 @@
 const router = require("express").Router();
 const { User, List, Product, ListProduct } = require("../models");
-
+const withAuth = require("../utils/auth");
 // Render homepage page
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
+    const listData = await List.findAll({
+      include: [{ model: User }],
+      where: {
+        user_id: req.session.userId,
+      },
+    });
+    const lists = listData.map((posts) => posts.get({ plain: true }));
     res.render("homepage", {
+      lists,
       loggedIn: Boolean(req?.session?.loggedIn),
       userId: req?.session?.userId,
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });

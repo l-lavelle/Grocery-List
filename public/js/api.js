@@ -58,7 +58,7 @@ function displaySearchResults(data) {
     const addButton = document.createElement("button");
     addButton.className = "btn btn-primary";
     addButton.textContent = "Add to List";
-    addButton.addEventListener("click", () => {
+    addButton.addEventListener("click", (event) => {
       addToItemList(food.foodId, food.label);
     });
 
@@ -79,7 +79,28 @@ function displaySearchResults(data) {
   resultsContainer.appendChild(row2);
 }
 
-function addToItemList(foodId, foodLabel) {
+async function addToItemList(foodId, foodLabel) {
+  try {
+    const response = await fetch(`/api/products/`, {
+      method: "POST",
+      body: JSON.stringify({ foodId, foodLabel }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await response.json();
+    if (response.ok) {
+      foodId = data.id;
+      console.log(foodId);
+    } else if (data.name === "SequelizeUniqueConstraintError") {
+      // const response = await fetch(`/api/products/`, {
+      //   method: "GET",
+      // });
+      // const data = await response.json();
+      console.log(data.id);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
   // TODO: Add item to list
-  console.log("Added to list:", { foodId, foodLabel });
+  // console.log("Added to list:", { foodId, foodLabel });
 }

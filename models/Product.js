@@ -19,6 +19,7 @@ Product.init(
     food_id: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
   },
   {

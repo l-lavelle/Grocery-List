@@ -3,6 +3,7 @@ submitBtn.addEventListener("click", async function (event) {
   event.preventDefault();
   const name = document.querySelector("#list-name").value.trim();
   if (name) {
+    // finds the user_id in the url
     const id = window.location.href.split("/")[4];
     if (id) {
       console.log(id);

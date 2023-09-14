@@ -2,7 +2,7 @@ const router = require("express").Router();
 // will need path for list model
 const { User, List, Product, ListProduct } = require("../../models");
 
-// get product by food_id
+// get product by food_id for testing not currently in use
 router.get("/", async (req, res) => {
   try {
     const productData = await Product.findAll({
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const productData = await Product.create({
-      name: req.body.name,
+      name: req.body.foodLabel,
       food_id: req.body.foodId,
     });
     res.status(200).json(productData);

@@ -8,7 +8,7 @@ router.get("/:user_id", async (req, res) => {
     const listData = await List.findAll({
       include: [{ model: User }],
       where: {
-        user_id: req.params.user_id,
+        user_id: req.session.userId,
       },
     });
     const lists = listData.map((posts) => posts.get({ plain: true }));

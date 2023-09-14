@@ -3,11 +3,11 @@
     <!-- Sidebar for displaying created lists -->
     <div class="col-md-3">
       <div class="list-group">
-        {{#each lists}}
-          <a href="#" class="list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
-            {{this.name}}
+        {{#each lists as |list|}}
+          <a href="#" id="{{id}}"class="list-group-item list-group-item-action" onclick="switchList('{{id}}')">
+            {{name}}
           </a>
-          <button class="btn btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">Delete</button>
+          <button class="btn btn-sm btn-danger" type="button" onclick="deleteList('{{id}}')">Delete</button>
         {{/each}}
       </div>
     </div>

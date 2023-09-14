@@ -5,7 +5,10 @@ const { User, List, Product, ListProduct } = require("../models");
 // Render homepage page
 router.get("/", async (req, res) => {
   try {
-    res.render("homepage");
+    res.render("homepage", {
+      loggedIn: Boolean(req?.session?.loggedIn),
+      userId: req?.session?.userId,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -59,7 +62,7 @@ router.post("/login", async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: {
-        username: req.body.username,
+        username: req.body.email,
       },
     });
     if (!dbUserData) {

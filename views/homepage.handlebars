@@ -20,9 +20,9 @@
         {{#each items}}
         <li class="list-group-item d-flex justify-content-between align-items-center">
           {{this.name}}
-          <div class="input-group input-group-sm">
+          <div class="input-group input-group-sm w-auto">
             <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity('{{this.id}}')">-</button>
-            <input type="text" class="form-control" value="{{this.quantity}}" id="quantity-{{this.id}}" readonly>
+            <input type="text" class="form-width-overwrite form-control" value="{{this.quantity}}" id="quantity-{{this.id}}" readonly>
             <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity('{{this.id}}')">+</button>
             <button class="btn btn-danger" type="button" onclick="removeItem('{{this.id}}')">Remove</button>
           </div>

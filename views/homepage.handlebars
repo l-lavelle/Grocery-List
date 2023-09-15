@@ -12,15 +12,15 @@
     </div>
 
 {{#if loggedIn}}
-<div class="col-md-4">
+<div id="list-container"class="col-md-4">
 <div class="input-group">
-  <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+  <select class="form-select" id="listChoice" aria-label="Example select with button addon">
     <option selected>Choose...</option>
     {{#each lists as |list|}}
-    <option value="{{id}}">{{name}}</option>
+    <option value={{id}} class="get-list">{{name}}</option>
     {{/each}}
   </select>
-  <button class="btn btn-outline-secondary" type="button">Button</button>
+  <button id="listItemBtn" class="btn btn-outline-secondary" type="button">Button</button>
 </div>
 
     {{!-- <div class="col-md-4">
@@ -73,5 +73,36 @@
     // Function to remove item
   }
 
+//fetch items for list and create list
+ async function getListItems(list_id) {
+  const response = await fetch(`/api/listProducts/list/${list_id}`);
+  const data = await response.json();
+  console.log(data.products);
+  const container = document.getElementById("list-container");
+  
+  let ul = document.createElement("ul");
+  ul.className="list-group";
+
+data.products.forEach(function(product) {
+  let li =document.createElement("li")
+  li.textContent = product.name;
+  li.append(ul);
+  console.log(product.name);
+});
+  document.body.append(ul)
+  console.log(container)
+}
+
+//How to get id value to pass into fetch?
+  itemsBtn = document.getElementById("listItemBtn");
+  itemsBtn.addEventListener("click", async function (event) {
+    event.preventDefault();
+    
+   {{!-- const list_id=document.querySelector(".get-list").value; --}}
+   const list_id=1
+
+  getListItems(list_id)
+
+  });
 
 </script>

@@ -3,11 +3,11 @@ const router = require("express").Router();
 const { User, List, Product, ListProduct } = require("../../models");
 
 // get product by food_id for testing not currently in use
-router.get("/", async (req, res) => {
+router.get("/:foodId", async (req, res) => {
   try {
     const productData = await Product.findAll({
       where: {
-        food_id: req.body.foodId,
+        food_id: req.params.foodId,
       },
     });
     res.status(200).json(productData);

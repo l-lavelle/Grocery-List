@@ -38,7 +38,19 @@
     // Function for switching between lists
   }
 
-  function deleteList(listId) {
-    // Function for deleting lists
-  }
+  const deleteList = async (listId) => {
+    const id = window.location.href.split("/")[5];
+    if (listId) {
+      const response = await fetch(`/api/lists/${listId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('You have successfully deleted the list!');
+        document.location.replace(`/api/lists/${id}`);
+      } else {
+        alert('Failed to delete list');
+      }
+    }
+  };
 </script>

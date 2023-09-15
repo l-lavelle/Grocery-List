@@ -81,6 +81,7 @@ function displaySearchResults(data) {
 
 async function addToItemList(foodId, foodLabel) {
   // console.log(foodLabel);
+  const list_id = 1;
   try {
     const response = await fetch(`/api/products/`, {
       method: "POST",
@@ -100,6 +101,15 @@ async function addToItemList(foodId, foodLabel) {
       // console.log(res[0].id);
     }
     console.log(product_id);
+    const createResponse = await fetch(`/api/listProducts/${product_id}`, {
+      method: "POST",
+      body: JSON.stringify({ list_id }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const createData = await createResponse.json();
+    if (createData.ok) {
+      document.location.replace("/");
+    }
   } catch (err) {
     console.log(err);
   }

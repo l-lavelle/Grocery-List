@@ -106,11 +106,10 @@
   itemsBtn.addEventListener("click", async function (event) {
     event.preventDefault();
     
-   {{!-- const list_id=document.querySelector(".get-list").value; --}}
-   const list_id=1
+    const listChoice = document.querySelector("#listChoice");
+    list_id=listChoice.value;
 
   getListItems(list_id)
-
   });
 
 </script>

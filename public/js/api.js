@@ -81,7 +81,6 @@ function displaySearchResults(data) {
 
 async function addToItemList(foodId, foodLabel) {
   // console.log(foodLabel);
-  const list_id = 1;
   try {
     const response = await fetch(`/api/products/`, {
       method: "POST",
@@ -113,7 +112,4 @@ async function addToItemList(foodId, foodLabel) {
   } catch (err) {
     console.log(err);
   }
-
-  // TODO: Add item to list
-  // console.log("Added to list:", { foodId, foodLabel });
 }

@@ -15,11 +15,11 @@ Product.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     food_id: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
   },
   {

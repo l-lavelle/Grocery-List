@@ -80,6 +80,7 @@ function displaySearchResults(data) {
 }
 
 async function addToItemList(foodId, foodLabel) {
+  // console.log(foodLabel);
   try {
     const response = await fetch(`/api/products/`, {
       method: "POST",
@@ -87,20 +88,28 @@ async function addToItemList(foodId, foodLabel) {
       headers: { "Content-Type": "application/json" },
     });
     const data = await response.json();
+    // console.log(data);
     if (response.ok) {
-      foodId = data.id;
-      console.log(foodId);
+      product_id = data.id;
+      // console.log(foodId);
     } else if (data.name === "SequelizeUniqueConstraintError") {
-      // const response = await fetch(`/api/products/`, {
-      //   method: "GET",
-      // });
-      // const data = await response.json();
-      console.log(data.id);
+      // console.log(3);
+      const response = await fetch(`/api/products/${foodLabel}`);
+      const res = await response.json();
+      product_id = res[0].id;
+      // console.log(res[0].id);
+    }
+    console.log(product_id);
+    const createResponse = await fetch(`/api/listProducts/${product_id}`, {
+      method: "POST",
+      body: JSON.stringify({ list_id }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const createData = await createResponse.json();
+    if (createData.ok) {
+      document.location.replace("/");
     }
   } catch (err) {
     console.log(err);
   }
-
-  // TODO: Add item to list
-  // console.log("Added to list:", { foodId, foodLabel });
 }

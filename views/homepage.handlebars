@@ -101,16 +101,18 @@
   console.log(container);
 }
 
-//How to get id value to pass into fetch?
   itemsBtn = document.getElementById("listItemBtn");
   itemsBtn.addEventListener("click", async function (event) {
     event.preventDefault();
     
-   {{!-- const list_id=document.querySelector(".get-list").value; --}}
-   const list_id=1
+    const listChoice = document.querySelector("#listChoice");
+    list_id=listChoice.value;
 
   getListItems(list_id)
-
+  });
+  
+  window.addEventListener("load",function(){
+    console.log(3)
   });
 
 </script>

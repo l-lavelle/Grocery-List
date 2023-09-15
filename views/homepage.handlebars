@@ -11,17 +11,22 @@
       </div>
     </div>
 
-{{#if loggedIn}}
-<div id="list-container"class="col-md-4">
-<div class="input-group">
-  <select class="form-select" id="listChoice" aria-label="Example select with button addon">
-    <option selected>Choose...</option>
-    {{#each lists as |list|}}
-    <option value={{id}} class="get-list">{{name}}</option>
-    {{/each}}
-  </select>
-  <button id="listItemBtn" class="btn btn-outline-secondary" type="button">Button</button>
-</div>
+    {{#if loggedIn}}
+    <div id="list-container" class="col-md-4">
+      <div class="input-group">
+        <select class="form-select" id="listChoice" aria-label="Example select with button addon">
+          <option selected>Choose...</option>
+          {{#each lists as |list|}}
+          <option value={{id}} class="get-list">{{name}}</option>
+          {{/each}}
+        </select>
+        <button id="listItemBtn" class="btn btn-outline-secondary" type="button">Button</button>
+      </div>
+      
+      <div id="list-items-container">
+        <!-- List items will be appended here -->
+      </div>
+    </div>
 
     {{!-- <div class="col-md-4">
       <h3>{{listName}}</h3>
@@ -74,23 +79,26 @@
   }
 
 //fetch items for list and create list
- async function getListItems(list_id) {
+  async function getListItems(list_id) {
   const response = await fetch(`/api/listProducts/list/${list_id}`);
   const data = await response.json();
   console.log(data.products);
-  const container = document.getElementById("list-container");
-  
-  let ul = document.createElement("ul");
-  ul.className="list-group";
 
-data.products.forEach(function(product) {
-  let li =document.createElement("li")
-  li.textContent = product.name;
-  li.append(ul);
-  console.log(product.name);
-});
-  document.body.append(ul)
-  console.log(container)
+  const container = document.getElementById("list-items-container");
+  container.innerHTML = '';
+
+  let ul = document.createElement("ul");
+  ul.className = "list-group";
+
+  data.products.forEach(function(product) {
+    let li = document.createElement("li");
+    li.textContent = product.name;
+    ul.appendChild(li);
+    console.log(product.name);
+  });
+
+  container.appendChild(ul);
+  console.log(container);
 }
 
 //How to get id value to pass into fetch?

@@ -15,8 +15,8 @@
     </div>
 
     <!-- selected list section -->
-    <div class="col-md-9">
-      <h1 class="my-3 text-center">{{listName}}</h1>
+    <div id="items" class="col-md-9">
+      {{!-- <h1 class="my-3 text-center">{{listName}}</h1>
 
       <ul class="list-group">
         {{#each items}}
@@ -31,12 +31,64 @@
           </li>
         {{/each}}
       </ul>
-    </div>
+    </div> --}}
   </div>
 </div>
 
 <script>
-  function switchList(listId) {
+  const container = document.getElementById("items");
+  
+  async function switchList(listId) {
+  container.innerHTML = '';
+  let ul = document.createElement("ul");
+  ul.className = "list-group";
+  container.appendChild(ul);
+  const response = await fetch(`/api/listProducts/list/${listId}`);
+  const data = await response.json();
+  console.log(data.products);
+
+  data.products.forEach(function(product) {
+    let li = document.createElement("li");
+    li.className="list-group-item d-flex justify-content-between align-items-center"
+    li.textContent = product.name;
+
+    let innerdiv = document.createElement("div")
+    innerdiv.className="input-group input-group-sm w-auto"
+
+    let dbtn = document.createElement("button")
+    dbtn.className="btn btn-outline-secondary"
+    dbtn.type="button"
+    dbtn.innerText="-"
+    dbtn.onclick=`decreaseQuantity(${product.id})`
+
+    let input = document.createElement("input");
+    input.type="text";
+    input.className="form-width-overwrite form-control";
+    input.value=`${product.quantity}`
+    input.id=`quantity-${product.id}`
+
+    let ibtn = document.createElement("button")
+    ibtn.className="btn btn-outline-secondary"
+    ibtn.type="button"
+    ibtn.innerText="+"
+    ibtn.onclick=`increaseQuantity(${product.id})`
+
+    let deleteBtn = document.createElement("button")
+    deleteBtn.className="btn btn-danger"
+    deleteBtn.type="button"
+    deleteBtn.innerText="Remove"
+    deleteBtn.onclick=`removeItem(${product.id})`
+
+    innerdiv.append(dbtn);
+    innerdiv.append(input);
+    innerdiv.append(ibtn);
+    innerdiv.append(deleteBtn);
+    li.append(innerdiv)
+    ul.appendChild(li);
+    console.log(product.name);
+  })
+
+
     // Function for switching between lists
   }
 

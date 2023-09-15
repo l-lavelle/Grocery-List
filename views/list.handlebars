@@ -1,28 +1,30 @@
 <div class="container">
   <div class="row">
     <!-- Sidebar for displaying created lists -->
-    <div class="col-md-3">
+    <div class="col-md-3 justify-content-center mt-5 border-end">
       <div class="list-group">
-        {{#each lists as |list|}}
-          <a href="#" id="{{id}}"class="list-group-item list-group-item-action" onclick="switchList('{{id}}')">
-            {{name}}
-          </a>
-          <button class="btn btn-sm btn-danger" type="button" onclick="deleteList('{{id}}')">Delete</button>
+        {{#each lists}}
+          <div class="d-flex justify-content-center w-100 p-3">
+            <a href="#" class="col-md-9 list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
+              {{this.name}}
+            </a>
+            <button class="col-md-2 btn btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">X</button>
+          </div>
         {{/each}}
       </div>
     </div>
 
     <!-- selected list section -->
     <div class="col-md-9">
-      <h1 class="my-3">{{listName}}</h1>
+      <h1 class="my-3 text-center">{{listName}}</h1>
 
       <ul class="list-group">
         {{#each items}}
           <li class="list-group-item d-flex justify-content-between align-items-center">
             {{this.name}}
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group-sm w-auto">
               <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity('{{this.id}}')">-</button>
-              <input type="text" class="form-control" value="{{this.quantity}}" id="quantity-{{this.id}}" readonly>
+              <input type="text" class="form-width-overwrite form-control" value="{{this.quantity}}" id="quantity-{{this.id}}" readonly>
               <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity('{{this.id}}')">+</button>
               <button class="btn btn-danger" type="button" onclick="removeItem('{{this.id}}')">Remove</button>
             </div>
@@ -38,7 +40,19 @@
     // Function for switching between lists
   }
 
-  function deleteList(listId) {
-    // Function for deleting lists
-  }
+  const deleteList = async (listId) => {
+    const id = window.location.href.split("/")[5];
+    if (listId) {
+      const response = await fetch(`/api/lists/${listId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('You have successfully deleted the list!');
+        document.location.replace(`/api/lists/${id}`);
+      } else {
+        alert('Failed to delete list');
+      }
+    }
+  };
 </script>

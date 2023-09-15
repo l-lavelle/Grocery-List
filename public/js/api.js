@@ -80,7 +80,7 @@ function displaySearchResults(data) {
 }
 
 async function addToItemList(foodId, foodLabel) {
-  console.log(foodLabel);
+  // console.log(foodLabel);
   try {
     const response = await fetch(`/api/products/`, {
       method: "POST",
@@ -88,16 +88,18 @@ async function addToItemList(foodId, foodLabel) {
       headers: { "Content-Type": "application/json" },
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (response.ok) {
-      foodId = data.id;
-      console.log(foodId);
+      product_id = data.id;
+      // console.log(foodId);
     } else if (data.name === "SequelizeUniqueConstraintError") {
-      console.log(3);
+      // console.log(3);
       const response = await fetch(`/api/products/${foodLabel}`);
       const res = await response.json();
-      console.log(res[0].id);
+      product_id = res[0].id;
+      // console.log(res[0].id);
     }
+    console.log(product_id);
   } catch (err) {
     console.log(err);
   }

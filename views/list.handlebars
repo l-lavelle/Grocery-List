@@ -23,9 +23,6 @@
   const userId= window.location.href.split("/")[5]
   const container = document.getElementById("items");
 
-   //delete item when click on
-  
-
   //Switch items clicking on list name
   async function switchList(listId) {
   container.innerHTML = '';
@@ -65,9 +62,22 @@
     let deleteBtn = document.createElement("button")
     deleteBtn.className="btn btn-danger"
     deleteBtn.type="button"
-    deleteBtn.innerText=`Remove-${product.list_product.id}`
+    deleteBtn.innerText=`Remove`
     deleteBtn.id=`${product.list_product.id}`
-    deleteBtn.onclick = async function() { 
+    deleteBtn.onclick = removeitem 
+
+    innerdiv.append(dbtn);
+    innerdiv.append(input);
+    innerdiv.append(ibtn);
+    innerdiv.append(deleteBtn);
+    li.append(innerdiv)
+    ul.appendChild(li);
+    console.log(product.name);
+  })
+  }
+
+ //delete item when click on
+async function removeitem() { 
       console.log(`/api/productList/${this.id}`)
     const response = await fetch(`/api/listProducts/${this.id}`, {
         method: 'DELETE',
@@ -81,16 +91,6 @@
       }
     };
 
-    innerdiv.append(dbtn);
-    innerdiv.append(input);
-    innerdiv.append(ibtn);
-    innerdiv.append(deleteBtn);
-    li.append(innerdiv)
-    ul.appendChild(li);
-    console.log(product.name);
-  })
-  }
- 
   //delete list when click on 
   const deleteList = async (listId) => {
     const id = window.location.href.split("/")[5];

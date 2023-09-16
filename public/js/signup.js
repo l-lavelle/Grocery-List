@@ -25,8 +25,9 @@ submitBtn.addEventListener("submit", async function (event) {
         headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
+      console.log(data);
       if (response.ok) {
-        document.location.replace("/");
+        document.location.replace(`/createlist/${data.id}`);
       } else if (data.name === "SequelizeUniqueConstraintError") {
         errorMessage.textContent = "Username already exists";
         errorMessage.style.color = "red";

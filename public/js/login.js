@@ -13,8 +13,7 @@ submitBtn.addEventListener("click", async function (event) {
 
   const email = document.querySelector("#email").value.trim();
   const password = document.querySelector("#password").value.trim();
-  console.log(email);
-  console.log(password);
+
   if (email && password) {
     const response = await fetch("/login", {
       method: "POST",
@@ -23,9 +22,8 @@ submitBtn.addEventListener("click", async function (event) {
     });
 
     const data = await response.json();
-    console.log(data);
     if (response.ok) {
-      document.location.replace(`/api/lists/${data.id}`);
+      document.location.replace(`/api/lists/${data.user.id}`);
     } else {
       errorMessage.textContent = "Incorrect Username or Password";
       errorMessage.style.color = "red";

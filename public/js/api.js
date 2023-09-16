@@ -32,7 +32,10 @@ function displaySearchResults(data) {
 
   limitedHintsArray.forEach((item, index) => {
     const food = item.food;
-
+    if(food.image === undefined){
+      food.image = "https://placehold.co/300?text=Tasty+Food+here";
+    }
+      console.log(food.image);
     const col = document.createElement("div");
     col.className = "col-md-4";
 

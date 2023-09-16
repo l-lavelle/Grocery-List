@@ -28,6 +28,7 @@ ListProduct.init(
     },
     quantity: {
       type: DataTypes.INTEGER,
+      defaultValue: 1,
     },
   },
   {

@@ -15,12 +15,11 @@
     <div id="list-container" class="col-md-4 border-end">
       <div class="input-group pt-3">
         <select class="form-select" id="listChoice" aria-label="Example select with button addon">
-          <option selected>Choose...</option>
+          <option selected>Choose List...</option>
           {{#each lists as |list|}}
           <option value={{id}} class="get-list">{{name}}</option>
           {{/each}}
         </select>
-        <button id="listItemBtn" class="btn btn-outline-light" type="button" style="background-color: #009eb5">Select</button>
       </div>
       
       <div id="list-items-container">
@@ -87,15 +86,13 @@
   console.log(container);
 }
 
-  itemsBtn = document.getElementById("listItemBtn");
-  itemsBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
-    
-    const listChoice = document.querySelector("#listChoice");
-    list_id=listChoice.value;
-
-  getListItems(list_id)
-  });
+const listChoice = document.querySelector("#listChoice")
+listChoice.addEventListener("click", async function(event){
+  event.preventDefault();
+  list_id=listChoice.value;
+  console.log(list_id);
+  getListItems(list_id);
+})
   
   window.addEventListener("load",function(){
     console.log(3)

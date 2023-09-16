@@ -51,6 +51,7 @@
     input.type="text";
     input.className="form-width-overwrite form-control";
     input.value=`${product.list_product.quantity}`
+    input.readOnly=true;
     input.id=`quantity-${product.list_product.id}`
 
     let ibtn = document.createElement("button")

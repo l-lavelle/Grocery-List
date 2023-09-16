@@ -1,6 +1,9 @@
 .form-width-overwrite{
     max-width: 40px;
   }
+  .form-width-overwrite-words{
+    max-width: 220px;
+  }
 .inputBox-margins{
     margin-left: 0px;
     margin-right: 0px;

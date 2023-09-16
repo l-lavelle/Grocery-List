@@ -20,7 +20,7 @@
           <option value={{id}} class="get-list">{{name}}</option>
           {{/each}}
         </select>
-        <button id="listItemBtn" class="btn btn-outline-secondary" type="button">Button</button>
+        <button id="listItemBtn" class="btn btn-outline-secondary" type="button">Select</button>
       </div>
       
       <div id="list-items-container">
@@ -92,7 +92,7 @@
 
   data.products.forEach(function(product) {
     let li = document.createElement("li");
-    li.textContent = product.name;
+    li.textContent = product.list_product.quantity + "  " + product.name;
     li.className = "list-group-item";
     ul.appendChild(li);
     console.log(product.name);

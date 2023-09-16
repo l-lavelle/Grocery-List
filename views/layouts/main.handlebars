@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+  <nav class="navbar navbar-expand-lg navbar-light px-5 border-bottom">
     <a class="navbar-brand" href="#">Grocery List</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,21 +20,21 @@
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item border-end border-start">
            {{#if loggedIn}}
             <a class="nav-link" href="/createlist/{{userId}}">Create List</a>
            {{else}}
            <a class="nav-link" href="/login">Create List</a>
            {{/if}}
         </li>
-        <li class="nav-item">
+        <li class="nav-item border-end border-start">
           {{#if loggedIn}}
           <a class="nav-link" href="/api/lists/{{userId}}">My list</a>
           {{else}}
             <a class="nav-link" href="/login">My list</a>
           {{/if}}
         </li>
-        <li class="nav-item">
+        <li class="nav-item border-end border-start">
           {{#if loggedIn}}
             <a class="nav-link" href="/logout">Logout</a>
           {{else}}

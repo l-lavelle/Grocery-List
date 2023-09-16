@@ -88,11 +88,12 @@
   container.innerHTML = '';
 
   let ul = document.createElement("ul");
-  ul.className = "list-group";
+  ul.className = "pt-3 list-group list-group-flush";
 
   data.products.forEach(function(product) {
     let li = document.createElement("li");
     li.textContent = product.name;
+    li.className = "list-group-item";
     ul.appendChild(li);
     console.log(product.name);
   });

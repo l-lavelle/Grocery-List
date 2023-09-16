@@ -72,12 +72,12 @@
   container.innerHTML = '';
 
   let ul = document.createElement("ul");
-  ul.className = "pt-3 list-group list-group-flush";
+  ul.className = "list-hight-overwrite overflow-auto pt-3 list-group list-group-flush";
 
   data.products.forEach(function(product) {
     let li = document.createElement("li");
     li.textContent = product.list_product.quantity + "  " + product.name;
-    li.className = "list-group-item";
+    li.className = "bg-light bg-gradien list-group-item";
     ul.appendChild(li);
     console.log(product.name);
   });

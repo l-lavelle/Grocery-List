@@ -37,7 +37,7 @@ function displaySearchResults(data) {
     col.className = "col-md-4";
 
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "card shadow";
     card.style.width = "100%";
 
     const cardBody = document.createElement("div");

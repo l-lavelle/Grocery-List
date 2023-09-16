@@ -28,10 +28,7 @@ function displaySearchResults(data) {
   const limitedHintsArray = hintsArray.slice(0, 6);
 
   const row1 = document.createElement("div");
-  row1.className = "row";
-
-  const row2 = document.createElement("div");
-  row2.className = "row";
+  row1.className = "row row-cols-1 row-cols-md-3 g-4";
 
   limitedHintsArray.forEach((item, index) => {
     const food = item.food;
@@ -55,28 +52,34 @@ function displaySearchResults(data) {
     cardImage.className = "card-img-top";
     cardImage.src = food.image;
 
+    const inputBox = document.createElement("div");
+    inputBox.className = "row inputBox-margins"
+
     const addButton = document.createElement("button");
-    addButton.className = "btn btn-primary";
+    addButton.className = "col btn btn-info btn-sm";
     addButton.textContent = "Add to List";
     addButton.addEventListener("click", (event) => {
-      addToItemList(food.foodId, food.label);
+      
+      addToItemList(food.foodId, food.label);      
     });
+
+    const quantityForm = document.createElement("input");
+    quantityForm.className = "col form-control form-control-sm form-width-overwrite";
+    quantityForm.type = "number";
+    quantityForm.value = "1";
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardImage);
-    cardBody.appendChild(addButton);
+    inputBox.appendChild(addButton);
+    inputBox.appendChild(quantityForm);
+    cardBody.appendChild(inputBox);
     card.appendChild(cardBody);
     col.appendChild(card);
-
-    if (index < 3) {
-      row1.appendChild(col);
-    } else {
-      row2.appendChild(col);
-    }
+    row1.appendChild(col);
+   
   });
 
-  resultsContainer.appendChild(row1);
-  resultsContainer.appendChild(row2);
+  resultsContainer.appendChild(row1);  
 }
 
 async function addToItemList(foodId, foodLabel) {

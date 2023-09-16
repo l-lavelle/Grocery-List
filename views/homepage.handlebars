@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <div class="mb-3 d-flex">
+      <div class="pt-3 pb-3 d-flex ">
         <input type="text" class="form-control" id="search-bar" placeholder="Search...">
         <button type="button" class="btn btn-primary ml-2" id="search-button">Search</button>
       </div>
@@ -13,7 +13,7 @@
 
     {{#if loggedIn}}
     <div id="list-container" class="col-md-4">
-      <div class="input-group">
+      <div class="input-group pt-3">
         <select class="form-select" id="listChoice" aria-label="Example select with button addon">
           <option selected>Choose...</option>
           {{#each lists as |list|}}

@@ -20,27 +20,13 @@
 </div>
 
 <script>
+  const userId= window.location.href.split("/")[5]
   const container = document.getElementById("items");
 
    //delete item when click on
-  {{!-- const removeItem = async (productId) =>{
-    console.log(productId)
-     if (listId) {
-      const response = await fetch(`/api/productList/${productId}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        console.log('You have successfully deleted the list!');
-        document.location.replace(`/api/lists/${id}`);
-      } else {
-        alert('Failed to delete list');
-      }
-    }
-  }; --}}
+  
 
   //Switch items clicking on list name
-  
   async function switchList(listId) {
   container.innerHTML = '';
   let ul = document.createElement("ul");
@@ -80,7 +66,20 @@
     deleteBtn.className="btn btn-danger"
     deleteBtn.type="button"
     deleteBtn.innerText=`Remove-${product.list_product.id}`
-    
+    deleteBtn.id=`${product.list_product.id}`
+    deleteBtn.onclick = async function() { 
+      console.log(`/api/productList/${this.id}`)
+    const response = await fetch(`/api/listProducts/${this.id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('You have successfully deleted the list!');
+        document.location.replace(`/api/lists/${userId}`);
+      } else {
+        alert('Failed to delete product');
+      }
+    };
 
     innerdiv.append(dbtn);
     innerdiv.append(input);

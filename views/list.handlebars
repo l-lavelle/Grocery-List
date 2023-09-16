@@ -5,7 +5,7 @@
       <div class="list-group">
         {{#each lists}}
           <div class="d-flex justify-content-center w-100 p-3">
-            <a href="#" class="col-md-9 list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
+            <a class="col-md-9 list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
               {{this.name}}
             </a>
             <button class="col-md-2 btn btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">X</button>
@@ -16,28 +16,14 @@
 
     <!-- selected list section -->
     <div id="items" class="col-md-9">
-      {{!-- <h1 class="my-3 text-center">{{listName}}</h1>
-
-      <ul class="list-group">
-        {{#each items}}
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            {{this.name}}
-            <div class="input-group input-group-sm w-auto">
-              <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity('{{this.id}}')">-</button>
-              <input type="text" class="form-width-overwrite form-control" value="{{this.quantity}}" id="quantity-{{this.id}}" readonly>
-              <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity('{{this.id}}')">+</button>
-              <button class="btn btn-danger" type="button" onclick="removeItem('{{this.id}}')">Remove</button>
-            </div>
-          </li>
-        {{/each}}
-      </ul>
-    </div> --}}
   </div>
 </div>
 
 <script>
+  const userId= window.location.href.split("/")[5]
   const container = document.getElementById("items");
-  
+
+  //Switch items clicking on list name
   async function switchList(listId) {
   container.innerHTML = '';
   let ul = document.createElement("ul");
@@ -59,25 +45,26 @@
     dbtn.className="btn btn-outline-secondary"
     dbtn.type="button"
     dbtn.innerText="-"
-    dbtn.onclick=`decreaseQuantity(${product.id})`
+    dbtn.onclick=`decreaseQuantity(${product.list_product.id})`
 
     let input = document.createElement("input");
     input.type="text";
     input.className="form-width-overwrite form-control";
-    input.value=`${product.quantity}`
-    input.id=`quantity-${product.id}`
+    input.value=`${product.list_product.quantity}`
+    input.id=`quantity-${product.list_product.id}`
 
     let ibtn = document.createElement("button")
     ibtn.className="btn btn-outline-secondary"
     ibtn.type="button"
     ibtn.innerText="+"
-    ibtn.onclick=`increaseQuantity(${product.id})`
+    ibtn.onclick=`increaseQuantity(${product.list_product.id})`
 
     let deleteBtn = document.createElement("button")
     deleteBtn.className="btn btn-danger"
     deleteBtn.type="button"
-    deleteBtn.innerText="Remove"
-    deleteBtn.onclick=`removeItem(${product.id})`
+    deleteBtn.innerText=`Remove`
+    deleteBtn.id=`${product.list_product.id}`
+    deleteBtn.onclick = removeitem 
 
     innerdiv.append(dbtn);
     innerdiv.append(input);
@@ -87,11 +74,24 @@
     ul.appendChild(li);
     console.log(product.name);
   })
-
-
-    // Function for switching between lists
   }
 
+ //delete item when click on
+async function removeitem() { 
+      console.log(`/api/productList/${this.id}`)
+    const response = await fetch(`/api/listProducts/${this.id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('You have successfully deleted the list!');
+        document.location.replace(`/api/lists/${userId}`);
+      } else {
+        alert('Failed to delete product');
+      }
+    };
+
+  //delete list when click on 
   const deleteList = async (listId) => {
     const id = window.location.href.split("/")[5];
     if (listId) {

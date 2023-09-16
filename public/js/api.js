@@ -59,7 +59,8 @@ function displaySearchResults(data) {
     inputBox.className = "row inputBox-margins"
 
     const addButton = document.createElement("button");
-    addButton.className = "col btn btn-info btn-sm";
+    addButton.className = "col btn btn-sm";
+    addButton.style = "background-color: #37d36d";
     addButton.textContent = "Add to List";
     addButton.addEventListener("click", (event) => {
       

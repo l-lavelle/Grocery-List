@@ -25,7 +25,7 @@ submitBtn.addEventListener("click", async function (event) {
     const data = await response.json();
     console.log(data);
     if (response.ok) {
-      document.location.replace("/");
+      document.location.replace(`/api/lists/${data.id}`);
     } else {
       errorMessage.textContent = "Incorrect Username or Password";
       errorMessage.style.color = "red";

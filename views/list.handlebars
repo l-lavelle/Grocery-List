@@ -8,7 +8,7 @@
             <a class="col-md-9 list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
               {{this.name}}
             </a>
-            <button class="col-md-2 btn btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">X</button>
+            <button style="background-color: #e74d4d" class="col-md-2 btn btn-outline-light btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">X</button>
           </div>
         {{/each}}
       </div>
@@ -27,7 +27,7 @@
   async function switchList(listId) {
   container.innerHTML = '';
   let ul = document.createElement("ul");
-  ul.className = "list-group";
+  ul.className = "list-hight-overwrite overflow-auto list-group";
   container.appendChild(ul);
   const response = await fetch(`/api/listProducts/list/${listId}`);
   const data = await response.json();
@@ -60,18 +60,19 @@
     ibtn.innerText="+"
     ibtn.onclick=`increaseQuantity(${product.list_product.id})`
 
-    let deleteBtn = document.createElement("button")
-    deleteBtn.className="btn btn-danger"
-    deleteBtn.type="button"
-    deleteBtn.innerText=`Remove`
-    deleteBtn.id=`${product.list_product.id}`
-    deleteBtn.onclick = removeitem 
+    let deleteBtn = document.createElement("button");
+    deleteBtn.className="mx-1 btn btn-outline-light btn-danger";
+    deleteBtn.style="background-color: #e74d4d";
+    deleteBtn.type="button";
+    deleteBtn.innerText=`Remove`;
+    deleteBtn.id=`${product.list_product.id}`;
+    deleteBtn.onclick = removeitem;
 
     innerdiv.append(dbtn);
     innerdiv.append(input);
     innerdiv.append(ibtn);
     innerdiv.append(deleteBtn);
-    li.append(innerdiv)
+    li.append(innerdiv);
     ul.appendChild(li);
     console.log(product.name);
   })

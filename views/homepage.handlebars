@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 border-start">
       <div class="pt-3 pb-3 d-flex ">
         <input type="text" class="form-control" id="search-bar" placeholder="Search...">
-        <button type="button" class="btn btn-primary ml-2" id="search-button">Search</button>
+        <button type="button" class="btn ml-2 btn-outline-light" id="search-button"  style="background-color: #009eb5">Search</button>
       </div>
 
       <div id="api-response-cards" class="container">
@@ -12,7 +12,7 @@
     </div>
 
     {{#if loggedIn}}
-    <div id="list-container" class="col-md-4">
+    <div id="list-container" class="col-md-4 border-end">
       <div class="input-group pt-3">
         <select class="form-select" id="listChoice" aria-label="Example select with button addon">
           <option selected>Choose...</option>
@@ -20,7 +20,7 @@
           <option value={{id}} class="get-list">{{name}}</option>
           {{/each}}
         </select>
-        <button id="listItemBtn" class="btn btn-outline-secondary" type="button">Select</button>
+        <button id="listItemBtn" class="btn btn-outline-light" type="button" style="background-color: #009eb5">Select</button>
       </div>
       
       <div id="list-items-container">
@@ -72,12 +72,13 @@
   container.innerHTML = '';
 
   let ul = document.createElement("ul");
-  ul.className = "pt-3 list-group list-group-flush";
+  ul.className = "list-hight-overwrite overflow-auto pt-3 list-group list-group-flush";
 
   data.products.forEach(function(product) {
     let li = document.createElement("li");
     li.textContent = product.list_product.quantity + "  " + product.name;
     li.className = "list-group-item";
+    li.style = "background-color: #ecf4ff"
     ul.appendChild(li);
     console.log(product.name);
   });

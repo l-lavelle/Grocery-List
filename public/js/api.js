@@ -32,12 +32,15 @@ function displaySearchResults(data) {
 
   limitedHintsArray.forEach((item, index) => {
     const food = item.food;
-
+    if(food.image === undefined){
+      food.image = "https://placehold.co/300?text=Tasty+Food+here";
+    }
+      console.log(food.image);
     const col = document.createElement("div");
     col.className = "col-md-4";
 
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "card shadow";
     card.style.width = "100%";
 
     const cardBody = document.createElement("div");
@@ -56,7 +59,8 @@ function displaySearchResults(data) {
     inputBox.className = "row inputBox-margins"
 
     const addButton = document.createElement("button");
-    addButton.className = "col btn btn-info btn-sm";
+    addButton.className = "col btn btn-sm";
+    addButton.style = "background-color: #37d36d";
     addButton.textContent = "Add to List";
     addButton.addEventListener("click", (event) => {
       

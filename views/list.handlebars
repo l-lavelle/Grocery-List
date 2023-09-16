@@ -80,14 +80,13 @@
 
  //delete item when click on
 async function removeitem() { 
-      console.log(`/api/productList/${this.id}`)
     const response = await fetch(`/api/listProducts/${this.id}`, {
         method: 'DELETE',
       });
 
       if (response.ok) {
-        console.log('You have successfully deleted the list!');
-        document.location.replace(`/api/lists/${userId}`);
+        console.log('You have successfully deleted the item!');
+        this.parentNode.parentNode.remove()
       } else {
         alert('Failed to delete product');
       }

@@ -48,7 +48,7 @@ function displaySearchResults(data) {
 
     const cardTitle = document.createElement("h5");
     cardTitle.id = food.foodId;
-    cardTitle.className = "card-title";
+    cardTitle.className = "card-title overflow-hidden max-hight-overwrite";
     cardTitle.textContent = food.label;
 
     const cardImage = document.createElement("img");

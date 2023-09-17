@@ -1,19 +1,23 @@
-.form-width-overwrite {
-  max-width: 40px;
+.form-width-overwrite-words{
+    max-width: 220px;
+  }
+.inputBox-margins{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+.list-hight-overwrite{
+    max-height: 600px;
+  }
+.max-hight-overwrite{
+    max-height: 25px;
+  }
+#list-items-container {
+  max-height: 500px;
 }
-.inputBox-margins {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-.list-hight-overwrite {
-  max-height: 600px;
-}
-
 @media only screen and (max-width: 767px) {
   #list-items-container {
     display: none;
   }
 }
-#list-items-container {
-  max-height: 500px;
-}
+
+

@@ -1,8 +1,7 @@
 const router = require("express").Router();
-// will need path for list model
-const { User, List, Product, ListProduct } = require("../../models");
+const { Product } = require("../../models");
 
-// get product by food_id for testing not currently in use
+// get product by product name
 router.get("/:product_name", async (req, res) => {
   try {
     const productData = await Product.findAll({

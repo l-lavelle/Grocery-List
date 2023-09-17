@@ -1,9 +1,9 @@
-.form-width-overwrite{
-    max-width: 40px;
-  }
 .form-width-overwrite-words{
     max-width: 220px;
   }
+.form-width-overwrite{
+  max-width: 35px;
+}
 .inputBox-margins{
     margin-left: 0px;
     margin-right: 0px;
@@ -14,3 +14,13 @@
 .max-hight-overwrite{
     max-height: 25px;
   }
+#list-items-container {
+  max-height: 500px;
+}
+@media only screen and (max-width: 767px) {
+  #list-items-container {
+    display: none;
+  }
+}
+
+

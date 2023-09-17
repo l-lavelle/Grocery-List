@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const { User, List, Product, ListProduct } = require("../models");
+const { User, List } = require("../models");
 const withAuth = require("../utils/auth");
+
 // Render homepage page
 router.get("/", withAuth, async (req, res) => {
   try {
@@ -32,7 +33,6 @@ router.get("/signup", async (req, res) => {
 });
 
 // Create new user
-// make sure variables correspond with user model once created
 router.post("/signup", async (req, res) => {
   try {
     const dbUserData = await User.create({
@@ -63,7 +63,6 @@ router.get("/login", async (req, res) => {
 });
 
 // Login
-// check with model for variables
 router.post("/login", async (req, res) => {
   try {
     const dbUserData = await User.findOne({
@@ -96,7 +95,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// get logout page
+// Render logout page
 router.get("/logout", async (req, res) => {
   try {
     res.render("logout");
@@ -125,86 +124,6 @@ router.get("/createlist/:user_id", async (req, res) => {
       userId: req?.session?.userId,
     });
   } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// trial delete after get all list that connect to user
-router.get("/:id", async (req, res) => {
-  try {
-    const adListData = await List.findAll({
-      include: [{ model: User }],
-      where: {
-        user_id: req.params.id,
-      },
-    });
-
-    const list = adListData.map((lists) => lists.get({ plain: true }));
-
-    res.json(list);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-// doesnt have a way to find users that belong to list would have to be many to many
-router.get("/data/:id", async (req, res) => {
-  try {
-    const adListData = await User.findAll({
-      include: [{ model: List }],
-      where: {
-        user_id: req.params.id,
-      },
-    });
-
-    const list = adListData.map((lists) => lists.get({ plain: true }));
-
-    res.json(list);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-// trial find list with all products and quanitity
-router.get("/list/:list_id", async (req, res) => {
-  try {
-    const tagid = await List.findByPk(req.params.list_id, {
-      include: [{ model: Product, through: ListProduct }],
-    });
-    return res.json(tagid);
-  } catch (err) {
-    console.log(err);
-    return res.json(err);
-  }
-});
-
-// if product not exist in database create
-router.post("/addItem", async (req, res) => {
-  try {
-    const dbUserData = await Product.create({
-      name: req.body.name,
-      food_id: req.body.food_id,
-    });
-    res.status(200).json(dbUserData);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-// if product does exist add to list
-router.post("/addItem/:list_id", async (req, res) => {
-  try {
-    const dbUserData = await ListProduct.create({
-      product_id: req.body.product_id,
-      list_id: req.params.list_id,
-      quantity: req.body.quantity,
-    });
-    res.status(200).json(dbUserData);
-  } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });

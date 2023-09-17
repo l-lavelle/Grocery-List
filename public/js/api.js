@@ -85,6 +85,7 @@ function displaySearchResults(data) {
   resultsContainer.appendChild(row1);
 }
 
+async function getProducts() {}
 async function addToItemList(foodId, foodLabel, quantity) {
   try {
     const response = await fetch(`/api/products/`, {

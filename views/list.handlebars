@@ -118,5 +118,12 @@ async function removeitem() {
     localStorage.setItem('LocalListId', id);
     console.log(id); 
     window.location.assign('/');
-  } 
+  }; 
+
+  const decreaseQuantity = async (listProductId) => {
+    const response = await fetch(`/api/listProducts/${listProductId}`, {
+        method: 'PUT',
+        
+      });
+  }
 </script>

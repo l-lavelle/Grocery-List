@@ -89,6 +89,7 @@ function displaySearchResults(data) {
 async function productAlreadyAdded(foodLabel, quantity) {
   const response = await fetch(`/api/products/${foodLabel}`);
   const res = await response.json();
+  console.log(res);
   product_id = res[0].id;
   addItemDatabase(product_id, quantity);
 }

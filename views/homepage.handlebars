@@ -3,7 +3,7 @@
     <div id="list-container" class="col-md-4 border-end">
       <div class="input-group pt-3">
         <select class="form-select" id="listChoice" aria-label="Example select with button addon">
-          <option selected>Choose List...</option>
+          <option id="currentListOption" selected>Choose List...</option>
           {{#each lists as |list|}}
           <option value={{id}} class="get-list">{{name}}</option>
           {{/each}}
@@ -80,7 +80,6 @@
   });
 
   container.appendChild(ul);
-  console.log(container);
 }
 
 const listChoice = document.querySelector("#listChoice")
@@ -92,7 +91,8 @@ listChoice.addEventListener("click", async function(event){
 })
   
   window.addEventListener("load",function(){
-    console.log(3)
+    var localId = localStorage.getItem("LocalListId")
+    console.log(localId)
   });
 
 </script>

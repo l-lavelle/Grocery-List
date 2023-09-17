@@ -67,8 +67,7 @@ function displaySearchResults(data) {
     });
 
     const quantityForm = document.createElement("input");
-    quantityForm.className =
-      "col form-control form-control-sm form-width-overwrite";
+    quantityForm.className ="col form-control form-control-sm form-width-overwrite";
     quantityForm.type = "number";
     quantityForm.value = "1";
 

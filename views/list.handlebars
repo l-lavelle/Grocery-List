@@ -8,7 +8,7 @@
             <a class="form-width-overwrite-words col-md-9 list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
               {{this.name}}
             </a>
-            <button style="background-color: #ffffff" class="col-md-2 btn btn-outline-dark btn-sm" type="button" onclick="editList({{this.id}})">Edit</button>
+            <button style="background-color: #ffffff" class="col-md-2 btn btn-outline-dark btn-sm" type="button" onclick="editList(`{{this.id}}`)">Edit</button>
             <button style="background-color: #e74d4d" class="col-md-2 btn btn-outline-light btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">X</button>
           </div>
         {{/each}}
@@ -114,8 +114,7 @@ async function removeitem() {
     // function to switch to home page
   async function editList(listId){
     let localStorage = window.localStorage;
-  
     localStorage.setItem('LocalListId', listId);
-    {{!-- window.location.assign('/'); --}}
+    window.location.assign('/');
   } 
 </script>

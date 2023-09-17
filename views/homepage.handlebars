@@ -1,17 +1,5 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 border-start">
-      <div class="pt-3 pb-3 d-flex ">
-        <input type="text" class="form-control" id="search-bar" placeholder="Search...">
-        <button type="button" class="btn ml-2 btn-outline-light" id="search-button"  style="background-color: #009eb5">Search</button>
-      </div>
-
-      <div id="api-response-cards" class="container">
-        <!-- Cards from API response will be generated here -->
-      </div>
-    </div>
-
-    {{#if loggedIn}}
     <div id="list-container" class="col-md-4 border-end">
       <div class="input-group pt-3">
         <select class="form-select" id="listChoice" aria-label="Example select with button addon">
@@ -26,8 +14,17 @@
         <!-- List items will be appended here -->
       </div>
     </div>
-   
-{{/if}}
+
+    <div class="col-md-8 border-start">
+      <div class="pt-3 pb-3 d-flex ">
+        <input type="text" class="form-control" id="search-bar" placeholder="Search...">
+        <button type="button" class="btn ml-2 btn-outline-light" id="search-button"  style="background-color: #009eb5">Search</button>
+      </div>
+
+      <div id="api-response-cards" class="container">
+        <!-- Cards from API response will be generated here -->
+      </div>
+    </div>
   </div>
 </div>
 

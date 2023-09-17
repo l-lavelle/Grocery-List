@@ -1,8 +1,7 @@
 const router = require("express").Router();
-// will need path for list model
-const { User, List, Product, ListProduct } = require("../../models");
+const { User, List } = require("../../models");
 
-// get all user lists
+// get all user lists and render List page
 router.get("/:user_id", async (req, res) => {
   try {
     const listData = await List.findAll({
@@ -22,6 +21,7 @@ router.get("/:user_id", async (req, res) => {
   }
 });
 
+// Create new list for user
 router.post("/:user_id", async (req, res) => {
   try {
     const listData = await List.create({
@@ -35,6 +35,7 @@ router.post("/:user_id", async (req, res) => {
   }
 });
 
+// Delete user list
 router.delete("/:id", async (req, res) => {
   try {
     const listData = await List.destroy({

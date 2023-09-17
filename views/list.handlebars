@@ -5,9 +5,10 @@
       <div class="list-group">
         {{#each lists}}
           <div class="d-flex justify-content-center w-100 p-3">
-            <a class="col-md-9 list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
+            <a class="form-width-overwrite-words col-md-9 list-group-item list-group-item-action" onclick="switchList('{{this.id}}')">
               {{this.name}}
             </a>
+            <button style="background-color: #ffffff" class="col-md-2 btn btn-outline-dark btn-sm" type="button" onclick="editList('{{this.id}}')">Edit</button>
             <button style="background-color: #e74d4d" class="col-md-2 btn btn-outline-light btn-sm btn-danger" type="button" onclick="deleteList('{{this.id}}')">X</button>
           </div>
         {{/each}}
@@ -109,4 +110,13 @@ async function removeitem() {
       }
     }
   };
+
+    // function to switch to home page
+  async function editList(){
+    let localStorage = window.localStorage;
+    let id = this.id;
+    localStorage.setItem('LocalListId', id);
+    console.log(id); 
+    window.location.assign('/');
+  } 
 </script>

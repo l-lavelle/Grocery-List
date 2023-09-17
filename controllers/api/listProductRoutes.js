@@ -1,26 +1,5 @@
 const router = require("express").Router();
-// will need path for listProduct model
-const { User, List, Product, ListProduct } = require("../../models");
-
-const withAuth = require("../../utils/auth");
-
-router.get("/:list_id", withAuth, async (req, res) => {
-  try {
-    const listProductData = await List.findByPk(req.params.list_id, {
-      include: [{ model: Product, through: ListProduct }],
-    });
-    const listProduct = listProductData.map((posts) =>
-      posts.get({ plain: true })
-    );
-    res.render("listProducts", {
-      listProduct,
-      loggedIn: Boolean(req?.session?.loggedIn),
-      userId: req?.session?.userId,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+const { List, Product, ListProduct } = require("../../models");
 
 // Fetch route for Dashboard list of items
 router.get("/list/:list_id", async (req, res) => {
@@ -34,19 +13,8 @@ router.get("/list/:list_id", async (req, res) => {
     return res.json(err);
   }
 });
-// for testing
-// router.get("/:list_id", async (req, res) => {
-//     try {
-//         const listProductData = await List.findByPk(req.params.list_id, {
-//             include: [{ model: Product, through: ListProduct }],
 
-//         });
-//         res.status(200).json(listProductData);
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-// });
-
+// Add product to user list
 router.post("/:product_id", async (req, res) => {
   try {
     const listProductData = await ListProduct.create({
@@ -61,6 +29,7 @@ router.post("/:product_id", async (req, res) => {
   }
 });
 
+// Delete a product from user list
 router.delete("/:id", async (req, res) => {
   try {
     const listProductData = await ListProduct.destroy({

@@ -85,7 +85,31 @@ function displaySearchResults(data) {
   resultsContainer.appendChild(row1);
 }
 
-async function getProducts() {}
+// If product exists in database get the product id
+async function productAlreadyAdded(foodLabel, quantity) {
+  const response = await fetch(`/api/products/${foodLabel}`);
+  const res = await response.json();
+  product_id = res[0].id;
+  addItemDatabase(product_id, quantity);
+}
+
+//Post item to users list in database
+async function addItemDatabase(product_id, quantity) {
+  try {
+    const createResponse = await fetch(`/api/listProducts/${product_id}`, {
+      method: "POST",
+      body: JSON.stringify({ list_id, quantity }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const createData = await createResponse.json();
+    console.log(createData);
+    getListItems(list_id);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//Post new product to database
 async function addToItemList(foodId, foodLabel, quantity) {
   try {
     const response = await fetch(`/api/products/`, {
@@ -94,28 +118,11 @@ async function addToItemList(foodId, foodLabel, quantity) {
       headers: { "Content-Type": "application/json" },
     });
     const data = await response.json();
-    // console.log(data);
     if (response.ok) {
       product_id = data.id;
-      // console.log(foodId);
+      addItemDatabase(product_id, quantity);
     } else if (data.name === "SequelizeUniqueConstraintError") {
-      // console.log(3);
-      const response = await fetch(`/api/products/${foodLabel}`);
-      const res = await response.json();
-      product_id = res[0].id;
-      // console.log(res[0].id);
-    }
-    console.log(product_id);
-    const createResponse = await fetch(`/api/listProducts/${product_id}`, {
-      method: "POST",
-      body: JSON.stringify({ list_id, quantity }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const createData = await createResponse.json();
-    console.log(createData);
-    if (createData.ok) {
-      //isnt sending a response??
-      getListItems(createData.list_id);
+      productAlreadyAdded(foodLabel, quantity);
     }
   } catch (err) {
     console.log(err);

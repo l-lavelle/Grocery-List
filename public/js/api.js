@@ -32,10 +32,10 @@ function displaySearchResults(data) {
 
   limitedHintsArray.forEach((item, index) => {
     const food = item.food;
-    if(food.image === undefined){
+    if (food.image === undefined) {
       food.image = "https://placehold.co/300?text=Tasty+Food+here";
     }
-      console.log(food.image);
+    console.log(food.image);
     const col = document.createElement("div");
     col.className = "col-md-4";
 
@@ -56,19 +56,19 @@ function displaySearchResults(data) {
     cardImage.src = food.image;
 
     const inputBox = document.createElement("div");
-    inputBox.className = "row inputBox-margins"
+    inputBox.className = "row inputBox-margins";
 
     const addButton = document.createElement("button");
     addButton.className = "col btn btn-sm";
     addButton.style = "background-color: #37d36d";
     addButton.textContent = "Add to List";
     addButton.addEventListener("click", (event) => {
-      
-      addToItemList(food.foodId, food.label);      
+      addToItemList(food.foodId, food.label, quantityForm.value);
     });
 
     const quantityForm = document.createElement("input");
-    quantityForm.className = "col form-control form-control-sm form-width-overwrite";
+    quantityForm.className =
+      "col form-control form-control-sm form-width-overwrite";
     quantityForm.type = "number";
     quantityForm.value = "1";
 
@@ -80,14 +80,12 @@ function displaySearchResults(data) {
     card.appendChild(cardBody);
     col.appendChild(card);
     row1.appendChild(col);
-   
   });
 
-  resultsContainer.appendChild(row1);  
+  resultsContainer.appendChild(row1);
 }
 
-async function addToItemList(foodId, foodLabel) {
-  // console.log(foodLabel);
+async function addToItemList(foodId, foodLabel, quantity) {
   try {
     const response = await fetch(`/api/products/`, {
       method: "POST",
@@ -109,12 +107,14 @@ async function addToItemList(foodId, foodLabel) {
     console.log(product_id);
     const createResponse = await fetch(`/api/listProducts/${product_id}`, {
       method: "POST",
-      body: JSON.stringify({ list_id }),
+      body: JSON.stringify({ list_id, quantity }),
       headers: { "Content-Type": "application/json" },
     });
     const createData = await createResponse.json();
+    console.log(createData);
     if (createData.ok) {
-      document.location.replace("/");
+      //isnt sending a response??
+      getListItems(createData.list_id);
     }
   } catch (err) {
     console.log(err);

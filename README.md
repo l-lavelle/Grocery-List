@@ -7,7 +7,10 @@ Create and edit lists of food.
 For this webpage we desided to create a list editor. Saving the users info to a database.  Allowing them to add and remove lists. As-well as adding, removing and update the quantity of items on lists.
 
 ## Screenshot
-
+![default state](./images/Screenshot_Grocery_List_4.png)
+![default state](./images/Screenshot_Grocery_List_1.png)
+![default state](./images/Screenshot_Grocery_List_2.png)
+![default state](./images/Screenshot_Grocery_List_3.png)
 
 
 ## Authors

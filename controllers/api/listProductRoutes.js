@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { List, Product, ListProduct } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 router.get("/:list_id", withAuth, async (req, res) => {
   try {
@@ -48,7 +49,7 @@ router.post("/:product_id", async (req, res) => {
 });
 
 //route to update quantity
-router.post('/quantity/:id', async (req, res) => {
+router.post("/quantity/:id", async (req, res) => {
   try {
     const listProductData = await ListProduct.update(req.body, {
       where: {

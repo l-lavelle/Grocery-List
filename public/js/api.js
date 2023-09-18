@@ -67,7 +67,8 @@ function displaySearchResults(data) {
     });
 
     const quantityForm = document.createElement("input");
-    quantityForm.className ="col form-control form-control-sm form-width-overwrite";
+    quantityForm.className =
+      "col form-control form-control-sm form-width-overwrite";
     quantityForm.type = "number";
     quantityForm.value = "1";
 
@@ -86,7 +87,12 @@ function displaySearchResults(data) {
 
 // If product exists in database get the product id
 async function productAlreadyAdded(foodLabel, quantity) {
-  const response = await fetch(`/api/products/${foodLabel}`);
+  const response = await fetch(`/api/products/${foodLabel}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  });
   const res = await response.json();
   console.log(res);
   product_id = res[0].id;

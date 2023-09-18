@@ -124,7 +124,9 @@ async function removeitem() {
 
   // function to decrease quantity of products
   async function decreaseQuantity() {
-    let quantity = this.nextSibling.value--;
+    let oldQuantity = this.nextSibling.value--;
+    let quantity = this.nextSibling.value;
+    console.log(quantity);
     const response = await fetch(`/api/listProducts/quantity/${this.id}`, {
      method: 'POST',
      body: JSON.stringify({ quantity }),
@@ -140,9 +142,9 @@ async function removeitem() {
 
   //function to increase quantity of products
   async function increaseQuantity() {
-    let quantity = this.previousSibling.value++;
-
-    console.log(this.previousSibling.value);
+    let oldQuantity = this.previousSibling.value++;
+    let quantity = this.previousSibling.value;
+    console.log(quantity);
     const response = await fetch(`/api/listProducts/quantity/${this.id}`, {
      method: 'POST',
      body: JSON.stringify({ quantity }),

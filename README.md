@@ -12,15 +12,18 @@ For this webpage we desided to create a list editor. Saving the users info to a 
 
 ## Authors
 
-Lauren L
-Joey W
-Matt H
-Tyler K
+Lauren L -  https://github.com/l-lavelle
+
+Joey W -  https://github.com/BertisJoey
+
+Matt H -  https://github.com/mHammy
+
+Tyler K - https://github.com/tkieras42
 
 
 ## License
 
-
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Acknowledgments
 
